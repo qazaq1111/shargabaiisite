@@ -58,7 +58,10 @@ function getCafeKeyboard() {
 
 function getSuperKeyboard() {
   return { reply_markup: {
-    keyboard: [['📋 Барлық кафелер', '📊 Статистика'], ['🚪 Шығу']], resize_keyboard: true
+    keyboard: [
+      ['📋 Барлық кафелер', '➕ Кафе қосу'],
+      ['📊 Статистика', '🚪 Шығу']
+    ], resize_keyboard: true
   }};
 }
 
@@ -495,42 +498,66 @@ bot.on('callback_query', async (callback) => {
   }
 });
 
-// ================== СУПЕР-АДМИН ==================
-bot.on('message', async (msg) => {
-  const chatId = msg.chat.id;
-  const text = msg.text;
-  
-  // Тек супер-админ рөлінде ғана жұмыс істейтін батырмалар
+// ================== СУПЕР-АДМИН РӨЛІ ==================
   if (sessions[chatId]?.role === 'superadmin') {
     if (text === '📋 Барлық кафелер') {
-      try {
-        const snap = await db.collection('cafes').get();
-        let list = '📋 *Барлық кафелер:*\n\n';
-        let count = 0;
-        snap.forEach(doc => { 
-          const d = doc.data(); 
-          list += `🔹 ${d.name || 'Атаусыз'} (ID: ${doc.id})\n`;
-          count++;
-        });
-        if (count === 0) list = '📭 *Әзірге ешқандай кафе жоқ.*';
-        bot.sendMessage(chatId, list, { parse_mode: 'Markdown' });
-      } catch (error) {
-        bot.sendMessage(chatId, `❌ Қате: ${error.message}`, { parse_mode: 'Markdown' });
-      }
-      return;
+      const snap = await db.collection('cafes').get();
+      let list = '📋 *Тіркелген кафелер тізімі:*\n\n';
+      snap.forEach(doc => {
+        const d = doc.data();
+        list += `🔹 Кафе ID: \`${doc.id}\`\n📌 Атауы: *${d.name || 'Атаусыз'}*\n👤 Логин: \`${d.login}\`\n🔑 Пароль: \`${d.password}\`\n------------------\n`;
+      });
+      return bot.sendMessage(chatId, list, { parse_mode: 'Markdown' });
+    }
+
+    if (text === '➕ Кафе қосу') {
+      sessions[chatId].step = 'new_cafe_id';
+      sessions[chatId].newCafe = {};
+      return bot.sendMessage(chatId, '🆔 *Жаңа кафе үшін Телеграм Chat ID немесе бірегей сан енгізіңіз:*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
     }
 
     if (text === '📊 Статистика') {
-      try {
-        const snap = await db.collection('cafes').get();
-        bot.sendMessage(chatId, `📊 *Жалпы статистика*\n👥 Тіркелген кафелер саны: ${snap.size}`, { parse_mode: 'Markdown' });
-      } catch (error) {
-        bot.sendMessage(chatId, `❌ Қате: ${error.message}`, { parse_mode: 'Markdown' });
-      }
-      return;
+      const snap = await db.collection('cafes').get();
+      return bot.sendMessage(chatId, `📊 *Жалпы жүйе статистикасы*\n👥 Барлық кафелер саны: ${snap.size}`, { parse_mode: 'Markdown' });
+    }
+
+    // Кафе қосу қадамдары
+    if (sessions[chatId]?.step === 'new_cafe_id') {
+      sessions[chatId].newCafe.id = text.trim();
+      sessions[chatId].step = 'new_cafe_name';
+      return bot.sendMessage(chatId, '📌 *Кафе атауын енгізіңіз (мысалы: Shargabaii Cafe):*', { parse_mode: 'Markdown' });
+    }
+
+    if (sessions[chatId]?.step === 'new_cafe_name') {
+      sessions[chatId].newCafe.name = text.trim();
+      sessions[chatId].step = 'new_cafe_login';
+      return bot.sendMessage(chatId, '👤 *Кафе үшін логин енгізіңіз:*', { parse_mode: 'Markdown' });
+    }
+
+    if (sessions[chatId]?.step === 'new_cafe_login') {
+      sessions[chatId].newCafe.login = text.trim();
+      sessions[chatId].step = 'new_cafe_pass';
+      return bot.sendMessage(chatId, '🔒 *Кафе үшін пароль енгізіңіз:*', { parse_mode: 'Markdown' });
+    }
+
+    if (sessions[chatId]?.step === 'new_cafe_pass') {
+      const cafeId = sessions[chatId].newCafe.id;
+      const cafeData = {
+        name: sessions[chatId].newCafe.name,
+        login: sessions[chatId].newCafe.login,
+        password: text.trim(),
+        menu: [],
+        stats: { views: 0, orders: 0 },
+        siteUrl: `https://shargabaii.site/cafe/${cafeId}`
+      };
+
+      await updateRealtimeAndFirestore(cafeId, cafeData);
+      sessions[chatId].step = null;
+      delete sessions[chatId].newCafe;
+
+      return bot.sendMessage(chatId, '✅ *Кафе сәтті қосылды!* Ол жүйеге кіріп, мәзір қоса алады.', { parse_mode: 'Markdown', ...getSuperKeyboard() });
     }
   }
-});
 
 // ================== ІСКЕ ҚОСУ ==================
 console.log('🚀 ТОЛЫҚ НҰСҚА (500+ жол) бот іске қосылды!');
