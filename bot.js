@@ -205,8 +205,11 @@ bot.on('message', async (msg) => {
     return;
   }
 
-  // ================== СУПЕР-АДМИН РӨЛІ ==================
-  if (sessions[chatId]?.role === 'superadmin') {
+  // ================== СУПЕР-АДМИН РӨЛІ (ТҮЗЕТІЛГЕН БӨЛІК) ==================
+  // Егер сессияда рөл болмаса, бірақ ID супер-админдікі болса немесе рөлі superadmin болса
+  if (sessions[chatId]?.role === 'superadmin' || chatId === SUPER_ADMIN_ID) {
+    if (!sessions[chatId]) sessions[chatId] = { role: 'superadmin' };
+
     if (text === '📋 Барлық кафелер') {
       const snap = await db.collection('cafes').get();
       if (snap.empty) {
@@ -226,7 +229,6 @@ bot.on('message', async (msg) => {
         if (menu.length > 0) {
           info += `📋 *Мәзір тізімі (${menu.length} тауар):*\n`;
           menu.forEach(item => {
-            info.format ? null : null;
             info += `- [${item.id}] ${item.name_kk || item.name_ru} — ${item.price} ₸ (${item.cat || 'Категориясыз'})\n`;
           });
         } else {
@@ -248,7 +250,10 @@ bot.on('message', async (msg) => {
       const snap = await db.collection('cafes').get();
       return bot.sendMessage(chatId, `📊 *Жалпы жүйе статистикасы*\n👥 Барлық тіркелген кафелер саны: *${snap.size}*`, { parse_mode: 'Markdown' });
     }
+  }
 
+  // Супер-админнің қосу қадамдары (step арқылы жүретіндер)
+  if (sessions[chatId]?.role === 'superadmin' || chatId === SUPER_ADMIN_ID) {
     if (sessions[chatId]?.step === 'new_cafe_id') {
       sessions[chatId].newCafe.id = text.trim();
       sessions[chatId].step = 'new_cafe_name';
@@ -285,6 +290,16 @@ bot.on('message', async (msg) => {
       return bot.sendMessage(chatId, '✅ *Кафе жүйеге сәтті қосылды!*', { parse_mode: 'Markdown', ...getSuperKeyboard() });
     }
   }
+
+  // ================== КАФЕ РӨЛІ ==================
+  if (sessions[chatId]?.role === 'cafe') {
+    // Кафе функциялары бұрынғыдай қалады...
+  }
+
+  // Егер түймелерге сәйкес келмесе
+  bot.sendMessage(chatId, '⚠️ *Мұндай команда немесе мәзір түймесі табылмады.*\nТөмендегі батырмаларды пайдаланыңыз немесе жүйеге кіріңіз.', { parse_mode: 'Markdown', ...getHomeButton() });
+});
+
 
   // ================== КАФЕ РӨЛІ ==================
   if (sessions[chatId]?.role === 'cafe') {
