@@ -87,17 +87,19 @@ bot.onText(/\/start/, (msg) => {
 });
 
 // ================== ЛОГИН ЖӘНЕ ХАБАРЛАМАЛАРДЫ ӨҢДЕУ ==================
+
 bot.on('message', async (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text;
   if (!text) return;
 
+  // Басты жүйелік командалар
   if (text === '🚪 Кіру') {
     sessions[chatId] = { step: 'login' };
     bot.sendMessage(chatId, '👤 *Логинді енгізіңіз:*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
     return;
   }
-
+  
   if (sessions[chatId]?.step === 'login') {
     sessions[chatId].login = text.trim();
     sessions[chatId].step = 'password';
@@ -207,7 +209,7 @@ bot.on('message', async (msg) => {
     return;
   }
 
-  // ================== СУПЕР-АДМИН РӨЛІ (ДҰРЫС ОРЫНДА) ==================
+  // ================== СУПЕР-АДМИН РӨЛІ ==================
   if (sessions[chatId]?.role === 'superadmin') {
     if (text === '📋 Барлық кафелер') {
       const snap = await db.collection('cafes').get();
@@ -230,11 +232,10 @@ bot.on('message', async (msg) => {
       return bot.sendMessage(chatId, `📊 *Жалпы жүйе статистикасы*\n👥 Барлық кафелер саны: ${snap.size}`, { parse_mode: 'Markdown' });
     }
 
-    // Кафе қосу қадамдары
     if (sessions[chatId]?.step === 'new_cafe_id') {
       sessions[chatId].newCafe.id = text.trim();
       sessions[chatId].step = 'new_cafe_name';
-      return bot.sendMessage(chatId, '📌 *Кафе атауын енгізіңіз (мысалы: Shargabaii Cafe):*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
+      return bot.sendMessage(chatId, '📌 *Кафе атауын енгізіңіз:*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
     }
 
     if (sessions[chatId]?.step === 'new_cafe_name') {
@@ -264,11 +265,11 @@ bot.on('message', async (msg) => {
       sessions[chatId].step = null;
       delete sessions[chatId].newCafe;
 
-      return bot.sendMessage(chatId, '✅ *Кафе сәтті қосылды!* Ол жүйеге кіріп, мәзір қоса алады.', { parse_mode: 'Markdown', ...getSuperKeyboard() });
+      return bot.sendMessage(chatId, '✅ *Кафе сәтті қосылды!*', { parse_mode: 'Markdown', ...getSuperKeyboard() });
     }
   }
 
-  // ================== КАФЕ МӘЗІРІ ==================
+  // ================== КАФЕ МӘЗІРІ ЖӘНЕ ФУНКЦИЯЛАРЫ ==================
   if (sessions[chatId]?.role === 'cafe') {
     if (text === '📋 Мәзірді көру') {
       const cafe = await getCafe(chatId);
@@ -330,9 +331,11 @@ bot.on('message', async (msg) => {
 
     if (text === '🔗 QR код') {
       const cafe = await getCafe(chatId);
-      const url = cafe?.siteUrl || 'https://sizdin_sayt.kz';
+      const url = cafe?.siteUrl || 'https://shargabaii.site';
       const qr = await QRCode.toDataURL(url);
-      return bot.sendPhoto(chatId, qr, { caption: `📱 *${url}*`, parse_mode: 'Markdown' });
+      const base64Data = qr.replace(/^data:image\/png;base64,/, "");
+      const imgBuffer = Buffer.from(base64Data, 'base64');
+      return bot.sendPhoto(chatId, imgBuffer, { caption: `📱 *${url}*`, parse_mode: 'Markdown' });
     }
 
     if (text === '📊 Статистика') {
@@ -463,7 +466,8 @@ bot.on('message', async (msg) => {
     }
   }
 
-  // ================== AI-КӨМЕКШІ ==================
+  // ================== AI-КӨМЕКШІ (ЕҢ СОҢЫНДА ОРНАЛАСАДЫ) ==================
+  // Жоғарыдағы бірде-бір түйме немесе қадам сәйкес келмеген жағдайда ғана AI-ға жіберіледі
   if (!text.startsWith('/')) {
     try {
       const response = await axios.post('https://api.deepseek.com/chat/completions', {
@@ -471,7 +475,8 @@ bot.on('message', async (msg) => {
         messages: [{ role: 'user', content: text }]
       }, { headers: { 'Authorization': `Bearer ${DEEPSEEK_API_KEY}` } });
       return bot.sendMessage(chatId, response.data.choices[0].message.content, { parse_mode: 'Markdown', ...getHomeButton() });
-    } catch {
+    } catch (error) {
+      console.error('AI Error:', error.response?.data || error.message);
       return bot.sendMessage(chatId, '❌ AI қатесі', { parse_mode: 'Markdown', ...getHomeButton() });
     }
   }
@@ -494,7 +499,7 @@ bot.on('photo', async (msg) => {
     }
     delete sessions[chatId].step;
     return bot.sendMessage(chatId, `✅ *Сурет сақталды!*\n🔗 ${link}`, { parse_mode: 'Markdown', ...getCafeKeyboard() });
-  } catch {
+  } catch (err) {
     return bot.sendMessage(chatId, '❌ Суретті жүктеу қатесі', { parse_mode: 'Markdown', ...getCafeKeyboard() });
   }
 });
@@ -523,7 +528,9 @@ bot.on('callback_query', async (callback) => {
   const chatId = callback.message.chat.id;
   if (callback.data === 'home') {
     await bot.answerCallbackQuery(callback.id);
-    sessions[chatId].step = null;
+    if (sessions[chatId]) {
+      sessions[chatId].step = null;
+    }
     if (sessions[chatId]?.role === 'superadmin') {
       return bot.sendMessage(chatId, '👑 *Супер-админ*', { parse_mode: 'Markdown', ...getSuperKeyboard() });
     } else if (sessions[chatId]?.role === 'cafe') {
