@@ -9,7 +9,6 @@ const axios = require('axios');
 const BOT_TOKEN = '8981884335:AAEOSGxNZCYppIiehOmhO6TCONpiOfdda9Y';
 const SUPER_ADMIN_ID = 7662045200;
 const KASPI_NUMBER = '+77473243971';
-const DEEPSEEK_API_KEY = 'sk-878af99b038144749008bb29af47df7c';
 const PHOTO_CHANNEL_ID = -1003945346272;
 const PHOTO_CHANNEL_USERNAME = 'shargabaisitebot';
 const SUPER_ADMIN_LOGIN = 'superadmin';
@@ -21,7 +20,7 @@ const serviceAccount = {
   "type": "service_account",
   "project_id": "shargabaiisite",
   "private_key_id": "431bf4b8cd2cf11f8fd0de7355007742c63dff43",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDhrVkLv/QhRdId\nhNmNYp4loYJvHQ4YuQqqF8LVGyKoJyrN7R6s2XrgpyRbm3/zCBPchwygHqCU/B47\nd6fi7YwNsUH/Hd4RGmNxMZt4sQS/a/B9y/2CMiBAc1FvskaBQa/wXuIYGAbUT6DP\nfc8qas7XmuNV6dLyVEGs1ECabqYrXF3T0FX4oOaahBFVEzIIM6i8sLi+CBNQaWjl\nFYnxwhTURCkvTv8H0bn7K+o1+YD+yJsGah9hZLgpx1RZH0ipUH/dEOmuTh9iF1ru\nVqF6C9rHHoguCmRcrk1pb6dTRVv4DYykQzbx3nV1LiTUHRE+8xAHXP1a5WhFSvx0\nVpDx2lifAgMBAAECggEAGYhPPBu/jHQlzYkrmT9rEmmEzvrD5DArRgs3fnzPcvmG\nHOjoQONqGjikIxPOFLpOj54H46W+F/JeSUQZuSbpuDLce0yZxJLuZUQY3ugdgrq8\n6WlG3pAP7hAd9TvU65LO9lcF0CFdGcWDNXZ6axt3w2pBW4WqLsMxmv14lwBQdInh\nqhpKGn18uAUADaY5ikD4h6XYw2yLQygWMJ6ie9+ZzBWfexVr6+AbbCPEmANWM+5M\nM+mwzpPX1BWdLIVwemUbUyF7MML+/DHocVEHrBLVQMuzbAFZof+mwrKRkqt354ac\n5zFlCjbYFL79CA0BH/PC8BSVeDUktP4jE5zir6ZX4QKBgQDzCOa1r9mCWEcpao7z\n/6ymDnqTxwGG7M8SYblD19PeQFlvPKxLwzX4s70Ev0NYGFjlZ1uht5Cu4HnzotMd\nuFETUcixzxXH9XIQ0R5kY50GTuwD0/NcqQL5lvCINzEIZuybJUxErWsLAZG9cLRt\nLEy/+FITmRmZMoNpxZO6DT4JVQKBgQDtt2U5AEm+Y5mSVntW6/HyCmIjuWLBbn1V\n4+nFHfSlfJjkLvTEzv0BQk4j5QN3yH8Um2aH37Zx4U5BSeMgrmww67KGVHzN2qNh\nS+TtaL+2ptgBQTRYAlg1T+VPQ/SoWhN8gUd0DaCWwFZSzECBAdzDqGa+x3XUhhdB\nyPTMyvrKIwKBgBbgep8Vm3rahnBOmIA9S+ohqMYqUGl79w365u6M7WOZWRHQe0Ny\nb60mdh9xRYyQViXZ8dUqK1Nay//0Dr1YcUFJTIP4Q0ucPg15McwvWEOUwECn/dt2\nCVKnM6MO1u28in8cJq68SDwz/J0Bc+pm5h6X6Fnx6mfySk51i69Suck1AoGAWJkj\n5uzOj2E72ajV632g/V8VWM89mW5+1EZP2KHjjtIzgchmffvPnGqECSjP9BMMGjgZ\nLMcajrM0oWzSdFnOBSWzshFHOsokXp0Uw89otMDWfRE6Wxr0mVof0z02sJBx9tOQ\nOBbkJYumINHzsKFrEJlxQeXBauZXQLOPWczFUBUCgYEArhlqNpaRV9vTshW0fwTC\ntpSMXW/UPutXY4P1bnjvo8qKtq1i0dN37YT9X2wzjegKi9YMLYoH3WgvK9jbq1W1\nLkMDpKS4JHD0C+/hrG72GUqzyWNVxPZyuX3qKlsdT3Yl4/staVe0WD45hbvomwFp\neESWlaJEYaDsx0co8e5rhZI=\n-----END PRIVATE KEY-----\n",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDhrVkLv/QhRdId\nhNmNYp4loYJvHQ4YuQqqF8LVGyKoJyrN7R6s2XrgpyRbm3/zCBPchwygHqCU/B47\nd6fi7YwNsUH/Hd4RGmNxMZt4sQS/a/B9y/2CMiBAc1FvskaBQa/wXuIYGAbUT6DP\nfc8qas7XmuNV6dLyVEGs1ECabqYrXF3T0FX4oOaahBFVEzIIM6i8sLi+CBNQaWjl\nFYnxwhTURCkvTv8H0bn7K+o1+YD+yJsGah9hZLgpx1RZH0ipUH/dEOmuTh9iF1ru\nVqF6C9rHHoguCmRcrk1pb6dTRVv4DYykQzbx3nV1LiTUHRE+8xAHXP1a5WhFSvx0\nVpDx2lifAgMBAAECggEAGYhPPBu/jHQlzYkrmT9rEmmEzvrD5DArRgs3fnzPcvmG\nHOjoQONqGjikIxPOFLpOj54H46W+F/JeSUQZuSbpuDLce0yZxJLuZUQY3ugdgrq8\n6WlG3pAP7hAd9TvU65LO9lcF0CFdGcWDNXZ6axt3w2pBW4WqLsMxmv14lwBQdInh\nqhpKGn18uAUADaY5ikD4h6XYw2yLQygWMJ6ie9+ZzBWfexVr6+AbbCPEmANWM+5M\nM+mwzpPX1BWdLIVwemUbUyF7MML+/DHocVEHrBLVQMuzbAFZof+mwrKRkqt354ac\n5zFlCjbYFL79CA0BH/PC8BSVeDUktP4jE5zir6ZX4QKBgQDzCOa1r9mCWEcpao7z\n/6ymDnqTxwGG7M8SYblD19PeQFlvPKxLwzX4s70Ev0NYGFjlZ1uht5Cu4HnzotMd\nuFETUcixzxXH9XIQ0R5kY50GTuwD0/NcqQL5lvCINzEIZuybJUxErWsLAZG9cLRt\LEy/+FITmRmZMoNpxZO6DT4JVQKBgQDtt2U5AEm+Y5mSVntW6/HyCmIjuWLBbn1V\n4+nFHfSlfJjkLvTEzv0BQk4j5QN3yH8Um2aH37Zx4U5BSeMgrmww67KGVHzN2qNh\S+TtaL+2ptgBQTRYAlg1T+VPQ/SoWhN8gUd0DaCWwFZSzECBAdzDqGa+x3XUhhdB\nyPTMyvrKIwKBgBbgep8Vm3rahnBOmIA9S+ohqMYqUGl79w365u6M7WOZWRHQe0Ny\nb60mdh9xRYyQViXZ8dUqK1Nay//0Dr1YcUFJTIP4Q0ucPg15McwvWEOUwECn/dt2\nCVKnM6MO1u28in8cJq68SDwz/J0Bc+pm5h6X6Fnx6mfySk51i69Suck1AoGAWJkj\n5uzOj2E72ajV632g/V8VWM89mW5+1EZP2KHjjtIzgchmffvPnGqECSjP9BMMGjgZ\nLMcajrM0oWzSdFnOBSWzshFHOsokXp0Uw89otMDWfRE6Wxr0mVof0z02sJBx9tOQ\nOBbkJYumINHzsKFrEJlxQeXBauZXQLOPWczFUBUCgYEArhlqNpaRV9vTshW0fwTC\ntpSMXW/UPutXY4P1bnjvo8qKtq1i0dN37YT9X2wzjegKi9YMLYoH3WgvK9jbq1W1\nLkMDpKS4JHD0C+/hrG72GUqzyWNVxPZyuX3qKlsdT3Yl4/staVe0WD45hbvomwFp\neESWlaJEYaDsx0co8e5rhZI=\n-----END PRIVATE KEY-----\n",
   "client_email": "firebase-adminsdk-fbsvc@shargabaiisite.iam.gserviceaccount.com",
   "client_id": "104903887535443706109"
 };
@@ -64,7 +63,6 @@ function getSuperKeyboard() {
   }};
 }
 
-// ================== НАҚТЫ УАҚЫТ ЖӘНЕ FIRESTORE ЖАҢАРТУ ==================
 async function updateRealtimeAndFirestore(cafeId, updateData) {
   await db.collection('cafes').doc(cafeId).set(updateData, { merge: true });
   await rtdb.ref(`cafes/${cafeId}`).update(updateData);
@@ -86,14 +84,12 @@ bot.onText(/\/start/, (msg) => {
   });
 });
 
-// ================== ЛОГИН ЖӘНЕ ХАБАРЛАМАЛАРДЫ ӨҢДЕУ ==================
-
+// ================== ХАБАРЛАМАЛАРДЫ ӨҢДЕУ ==================
 bot.on('message', async (msg) => {
   const chatId = msg.chat.id;
   const text = msg.text;
   if (!text) return;
 
-  // Басты жүйелік командалар
   if (text === '🚪 Кіру') {
     sessions[chatId] = { step: 'login' };
     bot.sendMessage(chatId, '👤 *Логинді енгізіңіз:*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
@@ -114,7 +110,7 @@ bot.on('message', async (msg) => {
     if (login === SUPER_ADMIN_LOGIN && pass === SUPER_ADMIN_PASS) {
       sessions[chatId] = { role: 'superadmin' };
       attempts[chatId] = 0;
-      bot.sendMessage(chatId, '👑 *Супер-админ панелі*', { parse_mode: 'Markdown', ...getSuperKeyboard() });
+      bot.sendMessage(chatId, '👑 *Супер-админ панеліне қош келдіңіз!*', { parse_mode: 'Markdown', ...getSuperKeyboard() });
       return;
     }
 
@@ -122,7 +118,7 @@ bot.on('message', async (msg) => {
     if (cafe && cafe.login === login && cafe.password === pass) {
       sessions[chatId] = { role: 'cafe', cafeId: String(chatId), cafeName: cafe.name || 'Кафе' };
       attempts[chatId] = 0;
-      bot.sendMessage(chatId, `🏪 *${sessions[chatId].cafeName}*`, { parse_mode: 'Markdown', ...getCafeKeyboard() });
+      bot.sendMessage(chatId, `🏪 *${sessions[chatId].cafeName} панелі*`, { parse_mode: 'Markdown', ...getCafeKeyboard() });
       return;
     }
 
@@ -130,10 +126,10 @@ bot.on('message', async (msg) => {
     const a = attempts[chatId];
     if (a >= 3) {
       delete sessions[chatId];
-      bot.sendMessage(chatId, '🚫 *3 рет қате! Бұғатталды!*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
+      bot.sendMessage(chatId, '🚫 *3 рет қате енгізілді! Бұғатталды.*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
       return;
     }
-    bot.sendMessage(chatId, `❌ *Қате!* (${a}/3)`, {
+    bot.sendMessage(chatId, `❌ *Қате логин немесе пароль!* (${a}/3)`, {
       parse_mode: 'Markdown',
       reply_markup: { keyboard: [['🔄 Қайталау'], ['🔑 Ұмыттым']], resize_keyboard: true }
     });
@@ -149,7 +145,7 @@ bot.on('message', async (msg) => {
 
   if (text === '🔑 Ұмыттым') {
     sessions[chatId] = { step: 'reset_phone' };
-    bot.sendMessage(chatId, '📱 *WhatsApp нөміріңізді енгізіңіз:*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
+    bot.sendMessage(chatId, '📱 *Кафеге тіркелген WhatsApp нөмірін енгізіңіз:*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
     return;
   }
 
@@ -157,26 +153,26 @@ bot.on('message', async (msg) => {
     const phone = text.replace(/\D/g, '');
     const cafe = await getCafe(chatId);
     if (!cafe || cafe.phone?.replace(/\D/g, '') !== phone) {
-      bot.sendMessage(chatId, '❌ *Нөмір табылмады!*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
+      bot.sendMessage(chatId, '❌ *Мұндай нөмір базадан табылмады!*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
       delete sessions[chatId];
       return;
     }
     sessions[chatId].resetCafeId = String(chatId);
     sessions[chatId].step = 'reset_check';
-    bot.sendMessage(chatId, `💰 *${RESET_PRICE} ₸* Kaspi: ${KASPI_NUMBER}\n\nЧек скриншотын жіберіңіз.`, { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
+    bot.sendMessage(chatId, `💰 *${RESET_PRICE} ₸* сомасын Kaspi арқылы мына нөмірге жіберіңіз: ${KASPI_NUMBER}\n\nТөлемнен кейін чек скриншотын немесе чек PDF файлын жіберіңіз.`, { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
     return;
   }
 
   if (sessions[chatId]?.step === 'reset_check' && msg.photo) {
     sessions[chatId].step = 'reset_check_number';
-    bot.sendMessage(chatId, '📝 *Чек нөмірін енгізіңіз:*', { parse_mode: 'Markdown' });
+    bot.sendMessage(chatId, '📝 *Чек нөмірін (немесе операция кодын) енгізіңіз:*', { parse_mode: 'Markdown' });
     return;
   }
 
   if (sessions[chatId]?.step === 'reset_check_number') {
     const checkNum = text.trim();
     if (usedChecks.includes(checkNum)) {
-      bot.sendMessage(chatId, '❌ *Бұл чек қолданылған!*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
+      bot.sendMessage(chatId, '❌ *Бұл чек бұрын қолданылған!*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
       delete sessions[chatId];
       return;
     }
@@ -198,14 +194,14 @@ bot.on('message', async (msg) => {
       login: sessions[chatId].newLogin,
       password: text.trim()
     });
-    bot.sendMessage(chatId, '✅ *Құпия сөз сәтті жаңартылды!*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
+    bot.sendMessage(chatId, '✅ *Құпия сөз бен логин сәтті жаңартылды!*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
     delete sessions[chatId];
     return;
   }
 
   if (text === '🚪 Шығу') {
     delete sessions[chatId];
-    bot.sendMessage(chatId, '👋 *Сау бол!*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
+    bot.sendMessage(chatId, '👋 *Жүйеден сәтті шықтыңыз!*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
     return;
   }
 
@@ -213,12 +209,33 @@ bot.on('message', async (msg) => {
   if (sessions[chatId]?.role === 'superadmin') {
     if (text === '📋 Барлық кафелер') {
       const snap = await db.collection('cafes').get();
-      let list = '📋 *Тіркелген кафелер тізімі:*\n\n';
-      snap.forEach(doc => {
+      if (snap.empty) {
+        return bot.sendMessage(chatId, '📭 *Әзірге тіркелген кафелер жоқ.*', { parse_mode: 'Markdown' });
+      }
+      
+      for (const doc of snap.docs) {
         const d = doc.data();
-        list += `🔹 Кафе ID: \`${doc.id}\`\n📌 Атауы: *${d.name || 'Атаусыз'}*\n👤 Логин: \`${d.login}\`\n🔑 Пароль: \`${d.password}\`\n------------------\n`;
-      });
-      return bot.sendMessage(chatId, list, { parse_mode: 'Markdown' });
+        let info = `📌 *Кафе туралы ақпарат:*\n`;
+        info += `🆔 ID / ChatID: \`${doc.id}\`\n`;
+        info += `🏢 Атауы: *${d.name || 'Атаусыз'}*\n`;
+        info += `👤 Логин: \`${d.login || 'Жоқ'}\`\n`;
+        info += `🔑 Пароль: \`${d.password || 'Жоқ'}\`\n`;
+        info += `🔗 Сайт сілтемесі: ${d.siteUrl || 'Жоқ'}\n\n`;
+
+        const menu = d.menu || [];
+        if (menu.length > 0) {
+          info += `📋 *Мәзір тізімі (${menu.length} тауар):*\n`;
+          menu.forEach(item => {
+            info.format ? null : null;
+            info += `- [${item.id}] ${item.name_kk || item.name_ru} — ${item.price} ₸ (${item.cat || 'Категориясыз'})\n`;
+          });
+        } else {
+          info += `📭 *Мәзірі бос*\n`;
+        }
+        
+        await bot.sendMessage(chatId, info, { parse_mode: 'Markdown' });
+      }
+      return;
     }
 
     if (text === '➕ Кафе қосу') {
@@ -229,7 +246,7 @@ bot.on('message', async (msg) => {
 
     if (text === '📊 Статистика') {
       const snap = await db.collection('cafes').get();
-      return bot.sendMessage(chatId, `📊 *Жалпы жүйе статистикасы*\n👥 Барлық кафелер саны: ${snap.size}`, { parse_mode: 'Markdown' });
+      return bot.sendMessage(chatId, `📊 *Жалпы жүйе статистикасы*\n👥 Барлық тіркелген кафелер саны: *${snap.size}*`, { parse_mode: 'Markdown' });
     }
 
     if (sessions[chatId]?.step === 'new_cafe_id') {
@@ -265,34 +282,34 @@ bot.on('message', async (msg) => {
       sessions[chatId].step = null;
       delete sessions[chatId].newCafe;
 
-      return bot.sendMessage(chatId, '✅ *Кафе сәтті қосылды!*', { parse_mode: 'Markdown', ...getSuperKeyboard() });
+      return bot.sendMessage(chatId, '✅ *Кафе жүйеге сәтті қосылды!*', { parse_mode: 'Markdown', ...getSuperKeyboard() });
     }
   }
 
-  // ================== КАФЕ МӘЗІРІ ЖӘНЕ ФУНКЦИЯЛАРЫ ==================
+  // ================== КАФЕ РӨЛІ ==================
   if (sessions[chatId]?.role === 'cafe') {
     if (text === '📋 Мәзірді көру') {
       const cafe = await getCafe(chatId);
       const menu = cafe?.menu || [];
-      if (!menu.length) return bot.sendMessage(chatId, '📭 *Мәзір бос*', { parse_mode: 'Markdown' });
-      let msg = '📋 *Мәзір:*\n\n';
-      menu.forEach((item, i) => msg += `${i+1}. ${item.name_kk} — ${item.price}₸\n`);
+      if (!menu.length) return bot.sendMessage(chatId, '📭 *Сіздің мәзіріңіз әзірге бос.*', { parse_mode: 'Markdown' });
+      let msg = '📋 *Сіздің мәзіріңіз:*\n\n';
+      menu.forEach((item, i) => msg += `${i+1}. ${item.name_kk} — ${item.price} ₸\n`);
       return bot.sendMessage(chatId, msg, { parse_mode: 'Markdown' });
     }
 
     if (text === '➕ Тауар қосу') {
       sessions[chatId].step = 'add_name_kk';
-      return bot.sendMessage(chatId, '📝 *Қазақша атауын енгізіңіз:*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
+      return bot.sendMessage(chatId, '📝 *Тауардың қазақша атауын енгізіңіз:*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
     }
 
     if (text === '✏️ Тауар өзгерту') {
       const cafe = await getCafe(chatId);
       const menu = cafe?.menu || [];
-      if (!menu.length) return bot.sendMessage(chatId, '📭 *Мәзір бос*', { parse_mode: 'Markdown' });
+      if (!menu.length) return bot.sendMessage(chatId, '📭 *Өзгертетін тауарлар жоқ, мәзір бос.*', { parse_mode: 'Markdown' });
       const buttons = menu.map(item => [`✏️ ${item.id}. ${item.name_kk}`]);
       buttons.push(['🔙 Артқа']);
       sessions[chatId].step = 'edit_select';
-      return bot.sendMessage(chatId, '✏️ *Қай тауарды өзгертесіз?*', {
+      return bot.sendMessage(chatId, '✏️ *Қай тауарды өзгерткіңіз келеді? Төменнен таңдаңыз:*', {
         parse_mode: 'Markdown',
         reply_markup: { keyboard: buttons, resize_keyboard: true }
       });
@@ -301,11 +318,11 @@ bot.on('message', async (msg) => {
     if (text === '🗑️ Тауар жою') {
       const cafe = await getCafe(chatId);
       const menu = cafe?.menu || [];
-      if (!menu.length) return bot.sendMessage(chatId, '📭 *Мәзір бос*', { parse_mode: 'Markdown' });
+      if (!menu.length) return bot.sendMessage(chatId, '📭 *Жоятын тауарлар жоқ, мәзір бос.*', { parse_mode: 'Markdown' });
       const buttons = menu.map(item => [`🗑️ ${item.id}. ${item.name_kk}`]);
       buttons.push(['🔙 Артқа']);
       sessions[chatId].step = 'delete_select';
-      return bot.sendMessage(chatId, '🗑️ *Қай тауарды жоясыз?*', {
+      return bot.sendMessage(chatId, '🗑️ *Қай тауарды жойғыңыз келеді? Төменнен таңдаңыз:*', {
         parse_mode: 'Markdown',
         reply_markup: { keyboard: buttons, resize_keyboard: true }
       });
@@ -314,7 +331,7 @@ bot.on('message', async (msg) => {
     if (text === '🖼️ Сурет жүктеу') {
       const cafe = await getCafe(chatId);
       const menu = cafe?.menu || [];
-      if (!menu.length) return bot.sendMessage(chatId, '📭 *Мәзір бос*', { parse_mode: 'Markdown' });
+      if (!menu.length) return bot.sendMessage(chatId, '📭 *Сурет жүктейтін тауарлар жоқ.*', { parse_mode: 'Markdown' });
       const buttons = menu.map(item => [`📸 ${item.id}. ${item.name_kk}`]);
       buttons.push(['🔙 Артқа']);
       sessions[chatId].step = 'photo_select';
@@ -326,7 +343,7 @@ bot.on('message', async (msg) => {
 
     if (text === '🎨 Түстер') {
       sessions[chatId].step = 'theme_accent';
-      return bot.sendMessage(chatId, '🎨 *Екпін түс (мысалы: #e94560):*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
+      return bot.sendMessage(chatId, '🎨 *Кафе сайтының екпін түсін енгізіңіз (мысалы: #e94560):*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
     }
 
     if (text === '🔗 QR код') {
@@ -335,18 +352,18 @@ bot.on('message', async (msg) => {
       const qr = await QRCode.toDataURL(url);
       const base64Data = qr.replace(/^data:image\/png;base64,/, "");
       const imgBuffer = Buffer.from(base64Data, 'base64');
-      return bot.sendPhoto(chatId, imgBuffer, { caption: `📱 *${url}*`, parse_mode: 'Markdown' });
+      return bot.sendPhoto(chatId, imgBuffer, { caption: `📱 *Кафеңіздің QR коды:*\n${url}`, parse_mode: 'Markdown' });
     }
 
     if (text === '📊 Статистика') {
       const cafe = await getCafe(chatId);
       const stats = cafe?.stats || { views: 0, orders: 0 };
-      return bot.sendMessage(chatId, `📊 *Статистика*\n👁️ Қаралым: ${stats.views}\n🛒 Тапсырыс: ${stats.orders}`, { parse_mode: 'Markdown' });
+      return bot.sendMessage(chatId, `📊 *Кафе статистикасы*\n👁️ Жалпы қаралым: *${stats.views}*\n🛒 Жалпы тапсырыс: *${stats.orders}*`, { parse_mode: 'Markdown' });
     }
 
     if (text === '🔙 Артқа') {
       delete sessions[chatId].step;
-      return bot.sendMessage(chatId, '🏪 *Басты мәзір*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
+      return bot.sendMessage(chatId, '🏪 *Кафе басқару панелі*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
     }
 
     // --- Тауар қосу қадамдары ---
@@ -387,7 +404,7 @@ bot.on('message', async (msg) => {
       menu.push(sessions[chatId].newItem);
       await updateRealtimeAndFirestore(String(chatId), { menu });
       delete sessions[chatId].step;
-      return bot.sendMessage(chatId, '✅ *Тауар сәтті қосылды!*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
+      return bot.sendMessage(chatId, '✅ *Жаңа тауар сәтті қосылды!*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
     }
 
     // --- Тауар өзгерту қадамдары ---
@@ -421,7 +438,7 @@ bot.on('message', async (msg) => {
       }
       await updateRealtimeAndFirestore(String(chatId), { menu });
       delete sessions[chatId].step;
-      return bot.sendMessage(chatId, '✅ *Тауар сәтті өзгертілді!*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
+      return bot.sendMessage(chatId, '✅ *Тауар деректері сәтті өзгертілді!*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
     }
 
     // --- Тауар жою ---
@@ -431,30 +448,30 @@ bot.on('message', async (msg) => {
       const menu = (cafe?.menu || []).filter(i => i.id !== id);
       await updateRealtimeAndFirestore(String(chatId), { menu });
       delete sessions[chatId].step;
-      return bot.sendMessage(chatId, '✅ *Тауар сәтті жойылды!*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
+      return bot.sendMessage(chatId, '✅ *Тауар мәзірден сәтті жойылды!*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
     }
 
-    // --- Түстер ---
+    // --- Түстерді баптау ---
     if (sessions[chatId]?.step === 'theme_accent') {
       sessions[chatId].theme = { accent: text.trim() };
       sessions[chatId].step = 'theme_bg';
-      return bot.sendMessage(chatId, '🎨 *Фон түсі (мысалы: #0d0d1a):*', { parse_mode: 'Markdown' });
+      return bot.sendMessage(chatId, '🎨 *Фон түсін енгізіңіз (мысалы: #0d0d1a):*', { parse_mode: 'Markdown' });
     }
     if (sessions[chatId]?.step === 'theme_bg') {
       sessions[chatId].theme.bg = text.trim();
       sessions[chatId].step = 'theme_card';
-      return bot.sendMessage(chatId, '🎨 *Карта түсі (мысалы: #1a1a2e):*', { parse_mode: 'Markdown' });
+      return bot.sendMessage(chatId, '🎨 *Карта түсін енгізіңіз (мысалы: #1a1a2e):*', { parse_mode: 'Markdown' });
     }
     if (sessions[chatId]?.step === 'theme_card') {
       sessions[chatId].theme.card = text.trim();
       sessions[chatId].step = 'theme_text';
-      return bot.sendMessage(chatId, '🎨 *Мәтін түсі (мысалы: #e8e8e8):*', { parse_mode: 'Markdown' });
+      return bot.sendMessage(chatId, '🎨 *Мәтін түсін енгізіңіз (мысалы: #e8e8e8):*', { parse_mode: 'Markdown' });
     }
     if (sessions[chatId]?.step === 'theme_text') {
       sessions[chatId].theme.text = text.trim();
       await updateRealtimeAndFirestore(String(chatId), { theme: sessions[chatId].theme });
       delete sessions[chatId].step;
-      return bot.sendMessage(chatId, '✅ *Түстер сәтті сақталды!*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
+      return bot.sendMessage(chatId, '✅ *Дизайн түстері сәтті сақталды!*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
     }
 
     // --- Сурет таңдау ---
@@ -462,27 +479,15 @@ bot.on('message', async (msg) => {
       const id = parseInt(text.split('.')[0].replace('📸 ', ''));
       sessions[chatId].photoItemId = id;
       sessions[chatId].step = 'photo_upload';
-      return bot.sendMessage(chatId, '📸 *Суретті жіберіңіз:*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
+      return bot.sendMessage(chatId, '📸 *Енді осы тауардың суретін чатқа жіберіңіз:*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
     }
   }
 
-  // ================== AI-КӨМЕКШІ (ЕҢ СОҢЫНДА ОРНАЛАСАДЫ) ==================
-  // Жоғарыдағы бірде-бір түйме немесе қадам сәйкес келмеген жағдайда ғана AI-ға жіберіледі
-  if (!text.startsWith('/')) {
-    try {
-      const response = await axios.post('https://api.deepseek.com/chat/completions', {
-        model: 'deepseek-chat',
-        messages: [{ role: 'user', content: text }]
-      }, { headers: { 'Authorization': `Bearer ${DEEPSEEK_API_KEY}` } });
-      return bot.sendMessage(chatId, response.data.choices[0].message.content, { parse_mode: 'Markdown', ...getHomeButton() });
-    } catch (error) {
-      console.error('AI Error:', error.response?.data || error.message);
-      return bot.sendMessage(chatId, '❌ AI қатесі', { parse_mode: 'Markdown', ...getHomeButton() });
-    }
-  }
+  // Егер түймелерге сәйкес келмесе, түсініксіз сөз жазғандарға қате хабарламасы
+  bot.sendMessage(chatId, '⚠️ *Мұндай команда немесе мәзір түймесі табылмады.*\nТөмендегі батырмаларды пайдаланыңыз немесе жүйеге кіріңіз.', { parse_mode: 'Markdown', ...getHomeButton() });
 });
 
-// ================== СУРЕТ ЖҮКТЕУ (Каналға жіберу) ==================
+// ================== СУРЕТ ЖҮКТЕУ (Канал арқылы) ==================
 bot.on('photo', async (msg) => {
   const chatId = msg.chat.id;
   if (sessions[chatId]?.step !== 'photo_upload') return;
@@ -498,32 +503,32 @@ bot.on('photo', async (msg) => {
       await updateRealtimeAndFirestore(String(chatId), { menu }); 
     }
     delete sessions[chatId].step;
-    return bot.sendMessage(chatId, `✅ *Сурет сақталды!*\n🔗 ${link}`, { parse_mode: 'Markdown', ...getCafeKeyboard() });
+    return bot.sendMessage(chatId, `✅ *Сурет сәтті жүктелді!*\n🔗 ${link}`, { parse_mode: 'Markdown', ...getCafeKeyboard() });
   } catch (err) {
-    return bot.sendMessage(chatId, '❌ Суретті жүктеу қатесі', { parse_mode: 'Markdown', ...getCafeKeyboard() });
+    return bot.sendMessage(chatId, '❌ Суретті жүктеу кезінде қате орын алды.', { parse_mode: 'Markdown', ...getCafeKeyboard() });
   }
 });
 
 // ================== PDF ЧЕКТЕРДІ ОҚУ ==================
 bot.on('document', async (msg) => {
   const chatId = msg.chat.id;
-  if (msg.document.mime_type !== 'application/pdf') return bot.sendMessage(chatId, '❌ Тек PDF форматы', { parse_mode: 'Markdown' });
+  if (msg.document.mime_type !== 'application/pdf') return bot.sendMessage(chatId, '❌ Тек PDF форматындағы чектер қабылданады.', { parse_mode: 'Markdown' });
   try {
     const file = await bot.getFile(msg.document.file_id);
     const url = `https://api.telegram.org/file/bot${BOT_TOKEN}/${file.file_path}`;
     const res = await axios.get(url, { responseType: 'arraybuffer' });
     const pdfData = await pdfParse(res.data);
     const match = pdfData.text.match(/\b(\d[\d\s]*\d)\b/);
-    if (!match) return bot.sendMessage(chatId, '❌ Сома табылмады', { parse_mode: 'Markdown' });
+    if (!match) return bot.sendMessage(chatId, '❌ Чектен сома табылмады.', { parse_mode: 'Markdown' });
     const amount = parseInt(match[0].replace(/\s/g, ''));
-    if (amount >= RESET_PRICE) return bot.sendMessage(chatId, '✅ *Төлем қабылданды!*', { parse_mode: 'Markdown', ...getHomeButton() });
-    else return bot.sendMessage(chatId, `❌ Төлем сомасы аз: ${amount} ₸`, { parse_mode: 'Markdown', ...getHomeButton() });
+    if (amount >= RESET_PRICE) return bot.sendMessage(chatId, '✅ *Төлем расталды! Құпия сөзді қалпына келтіруге рұқсат етілді.*', { parse_mode: 'Markdown', ...getHomeButton() });
+    else return bot.sendMessage(chatId, `❌ Төлем сомасы жеткіліксіз: ${amount} ₸ (Талап етілетін: ${RESET_PRICE} ₸)`, { parse_mode: 'Markdown', ...getHomeButton() });
   } catch { 
-    return bot.sendMessage(chatId, '❌ PDF оқу қатесі', { parse_mode: 'Markdown', ...getHomeButton() }); 
+    return bot.sendMessage(chatId, '❌ PDF файлын оқу кезінде қате шықты.', { parse_mode: 'Markdown', ...getHomeButton() }); 
   }
 });
 
-// ================== CALLBACK QUERY (0️⃣ БАТЫРМАСЫ) ==================
+// ================== CALLBACK QUERY ==================
 bot.on('callback_query', async (callback) => {
   const chatId = callback.message.chat.id;
   if (callback.data === 'home') {
@@ -532,13 +537,13 @@ bot.on('callback_query', async (callback) => {
       sessions[chatId].step = null;
     }
     if (sessions[chatId]?.role === 'superadmin') {
-      return bot.sendMessage(chatId, '👑 *Супер-админ*', { parse_mode: 'Markdown', ...getSuperKeyboard() });
+      return bot.sendMessage(chatId, '👑 *Супер-админ панелі*', { parse_mode: 'Markdown', ...getSuperKeyboard() });
     } else if (sessions[chatId]?.role === 'cafe') {
-      return bot.sendMessage(chatId, '🏪 *Басты мәзір*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
+      return bot.sendMessage(chatId, '🏪 *Кафе панелі*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
     } else {
       return bot.sendMessage(chatId, '🍽️ *Басты бет*', { parse_mode: 'Markdown', reply_markup: { keyboard: [['🚪 Кіру']], resize_keyboard: true } });
     }
   }
 });
 
-console.log('🚀 Бот сәтті іске қосылды және барлық функциялар жұмыс істеп тұр!');
+console.log('🚀 Бот AI-сыз, таза логикамен сәтті іске қосылды!');
