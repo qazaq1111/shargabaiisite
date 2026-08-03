@@ -20,7 +20,7 @@ const serviceAccount = {
   "type": "service_account",
   "project_id": "shargabaiisite",
   "private_key_id": "431bf4b8cd2cf11f8fd0de7355007742c63dff43",
-  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDhrVkLv/QhRdId\nhNmNYp4loYJvHQ4YuQqqF8LVGyKoJyrN7R6s2XrgpyRbm3/zCBPchwygHqCU/B47\nd6fi7YwNsUH/Hd4RGmNxMZt4sQS/a/B9y/2CMiBAc1FvskaBQa/wXuIYGAbUT6DP\nfc8qas7XmuNV6dLyVEGs1ECabqYrXF3T0FX4oOaahBFVEzIIM6i8sLi+CBNQaWjl\nFYnxwhTURCkvTv8H0bn7K+o1+YD+yJsGah9hZLgpx1RZH0ipUH/dEOmuTh9iF1ru\nVqF6C9rHHoguCmRcrk1pb6dTRVv4DYykQzbx3nV1LiTUHRE+8xAHXP1a5WhFSvx0\nVpDx2lifAgMBAAECggEAGYhPPBu/jHQlzYkrmT9rEmmEzvrD5DArRgs3fnzPcvmG\nHOjoQONqGjikIxPOFLpOj54H46W+F/JeSUQZuSbpuDLce0yZxJLuZUQY3ugdgrq8\n6WlG3pAP7hAd9TvU65LO9lcF0CFdGcWDNXZ6axt3w2pBW4WqLsMxmv14lwBQdInh\nqhpKGn18uAUADaY5ikD4h6XYw2yLQygWMJ6ie9+ZzBWfexVr6+AbbCPEmANWM+5M\nM+mwzpPX1BWdLIVwemUbUyF7MML+/DHocVEHrBLVQMuzbAFZof+mwrKRkqt354ac\n5zFlCjbYFL79CA0BH/PC8BSVeDUktP4jE5zir6ZX4QKBgQDzCOa1r9mCWEcpao7z\n/6ymDnqTxwGG7M8SYblD19PeQFlvPKxLwzX4s70Ev0NYGFjlZ1uht5Cu4HnzotMd\nuFETUcixzxXH9XIQ0R5kY50GTuwD0/NcqQL5lvCINzEIZuybJUxErWsLAZG9cLRt\LEy/+FITmRmZMoNpxZO6DT4JVQKBgQDtt2U5AEm+Y5mSVntW6/HyCmIjuWLBbn1V\n4+nFHfSlfJjkLvTEzv0BQk4j5QN3yH8Um2aH37Zx4U5BSeMgrmww67KGVHzN2qNh\S+TtaL+2ptgBQTRYAlg1T+VPQ/SoWhN8gUd0DaCWwFZSzECBAdzDqGa+x3XUhhdB\nyPTMyvrKIwKBgBbgep8Vm3rahnBOmIA9S+ohqMYqUGl79w365u6M7WOZWRHQe0Ny\nb60mdh9xRYyQViXZ8dUqK1Nay//0Dr1YcUFJTIP4Q0ucPg15McwvWEOUwECn/dt2\nCVKnM6MO1u28in8cJq68SDwz/J0Bc+pm5h6X6Fnx6mfySk51i69Suck1AoGAWJkj\n5uzOj2E72ajV632g/V8VWM89mW5+1EZP2KHjjtIzgchmffvPnGqECSjP9BMMGjgZ\nLMcajrM0oWzSdFnOBSWzshFHOsokXp0Uw89otMDWfRE6Wxr0mVof0z02sJBx9tOQ\nOBbkJYumINHzsKFrEJlxQeXBauZXQLOPWczFUBUCgYEArhlqNpaRV9vTshW0fwTC\ntpSMXW/UPutXY4P1bnjvo8qKtq1i0dN37YT9X2wzjegKi9YMLYoH3WgvK9jbq1W1\nLkMDpKS4JHD0C+/hrG72GUqzyWNVxPZyuX3qKlsdT3Yl4/staVe0WD45hbvomwFp\neESWlaJEYaDsx0co8e5rhZI=\n-----END PRIVATE KEY-----\n",
+  "private_key": "-----BEGIN PRIVATE KEY-----\nMIIEvQIBADANBgkqhkiG9w0BAQEFAASCBKcwggSjAgEAAoIBAQDhrVkLv/QhRdId\nhNmNYp4loYJvHQ4YuQqqF8LVGyKoJyrN7R6s2XrgpyRbm3/zCBPchwygHqCU/B47\nd6fi7YwNsUH/Hd4RGmNxMZt4sQS/a/B9y/2CMiBAc1FvskaBQa/wXuIYGAbUT6DP\nfc8qas7XmuNV6dLyVEGs1ECabqYrXF3T0FX4oOaahBFVEzIIM6i8sLi+CBNQaWjl\nFYnxwhTURCkvTv8H0bn7K+o1+YD+yJsGah9hZLgpx1RZH0ipUH/dEOmuTh9iF1ru\nVqF6C9rHHoguCmRcrk1pb6dTRVv4DYykQzbx3nV1LiTUHRE+8xAHXP1a5WhFSvx0\nVpDx2lifAgMBAAECggEAGYhPPBu/jHQlzYkrmT9rEmmEzvrD5DArRgs3fnzPcvmG\nHOjoQONqGjikIxPOFLpOj54H46W+F/JeSUQZuSbpuDLce0yZxJLuZUQY3ugdgrq8\n6WlG3pAP7hAd9TvU65LO9lcF0CFdGcWDNXZ6axt3w2pBW4WqLsMxmv14lwBQdInh\nqhpKGn18uAUADaY5ikD4h6XYw2yLQygWMJ6ie9+ZzBWfexVr6+AbbCPEmANWM+5M\nM+mwzpPX1BWdLIVwemUbUyF7MML+/DHocVEHrBLVQMuzbAFZof+mwrKRkqt354ac\n5zFlCjbYFL79CA0BH/PC8BSVeDUktP4jE5zir6ZX4QKBgQDzCOa1r9mCWEcpao7z\n/6ymDnqTxwGG7M8SYblD19PeQFlvPKxLwzX4s70Ev0NYGFjlZ1uht5Cu4HnzotMd\nuFETUcixzxXH9XIQ0R5kY50GTuwD0/NcqQL5lvCINzEIZuybJUxErWsLAZG9cLRt\LEy/+FITmRmZMoNpxZO6DT4JVQKBgQDtt2U5AEm+Y5mSVntW6/HyCmIjuWLBbn1V\4+nFHfSlfJjkLvTEzv0BQk4j5QN3yH8Um2aH37Zx4U5BSeMgrmww67KGVHzN2qNh\S+TtaL+2ptgBQTRYAlg1T+VPQ/SoWhN8gUd0DaCWwFZSzECBAdzDqGa+x3XUhhdB\nyPTMyvrKIwKBgBbgep8Vm3rahnBOmIA9S+ohqMYqUGl79w365u6M7WOZWRHQe0Ny\nb60mdh9xRYyQViXZ8dUqK1Nay//0Dr1YcUFJTIP4Q0ucPg15McwvWEOUwECn/dt2\nCVKnM6MO1u28in8cJq68SDwz/J0Bc+pm5h6X6Fnx6mfySk51i69Suck1AoGAWJkj\n5uzOj2E72ajV632g/V8VWM89mW5+1EZP2KHjjtIzgchmffvPnGqECSjP9BMMGjgZ\nLMcajrM0oWzSdFnOBSWzshFHOsokXp0Uw89otMDWfRE6Wxr0mVof0z02sJBx9tOQ\nOBbkJYumINHzsKFrEJlxQeXBauZXQLOPWczFUBUCgYEArhlqNpaRV9vTshW0fwTC\ntpSMXW/UPutXY4P1bnjvo8qKtq1i0dN37YT9X2wzjegKi9YMLYoH3WgvK9jbq1W1\nLkMDpKS4JHD0C+/hrG72GUqzyWNVxPZyuX3qKlsdT3Yl4/staVe0WD45hbvomwFp\neESWlaJEYaDsx0co8e5rhZI=\n-----END PRIVATE KEY-----\n",
   "client_email": "firebase-adminsdk-fbsvc@shargabaiisite.iam.gserviceaccount.com",
   "client_id": "104903887535443706109"
 };
@@ -205,8 +205,7 @@ bot.on('message', async (msg) => {
     return;
   }
 
-  // ================== СУПЕР-АДМИН РӨЛІ (ТҮЗЕТІЛГЕН БӨЛІК) ==================
-  // Егер сессияда рөл болмаса, бірақ ID супер-админдікі болса немесе рөлі superadmin болса
+  // ================== СУПЕР-АДМИН РӨЛІ ==================
   if (sessions[chatId]?.role === 'superadmin' || chatId === SUPER_ADMIN_ID) {
     if (!sessions[chatId]) sessions[chatId] = { role: 'superadmin' };
 
@@ -246,14 +245,12 @@ bot.on('message', async (msg) => {
       return bot.sendMessage(chatId, '🆔 *Жаңа кафе үшін Телеграм Chat ID немесе бірегей сан енгізіңіз:*', { parse_mode: 'Markdown', reply_markup: { remove_keyboard: true } });
     }
 
-    if (text === '📊 Статистика') {
+    if (text === '📊 Статистика' && sessions[chatId]?.role === 'superadmin') {
       const snap = await db.collection('cafes').get();
       return bot.sendMessage(chatId, `📊 *Жалпы жүйе статистикасы*\n👥 Барлық тіркелген кафелер саны: *${snap.size}*`, { parse_mode: 'Markdown' });
     }
-  }
 
-  // Супер-админнің қосу қадамдары (step арқылы жүретіндер)
-  if (sessions[chatId]?.role === 'superadmin' || chatId === SUPER_ADMIN_ID) {
+    // Супер-админ қосу қадамдары
     if (sessions[chatId]?.step === 'new_cafe_id') {
       sessions[chatId].newCafe.id = text.trim();
       sessions[chatId].step = 'new_cafe_name';
@@ -293,23 +290,13 @@ bot.on('message', async (msg) => {
 
   // ================== КАФЕ РӨЛІ ==================
   if (sessions[chatId]?.role === 'cafe') {
-    // Кафе функциялары бұрынғыдай қалады...
-  }
-
-  // Егер түймелерге сәйкес келмесе
-  bot.sendMessage(chatId, '⚠️ *Мұндай команда немесе мәзір түймесі табылмады.*\nТөмендегі батырмаларды пайдаланыңыз немесе жүйеге кіріңіз.', { parse_mode: 'Markdown', ...getHomeButton() });
-});
-
-
-  // ================== КАФЕ РӨЛІ ==================
-  if (sessions[chatId]?.role === 'cafe') {
     if (text === '📋 Мәзірді көру') {
       const cafe = await getCafe(chatId);
       const menu = cafe?.menu || [];
       if (!menu.length) return bot.sendMessage(chatId, '📭 *Сіздің мәзіріңіз әзірге бос.*', { parse_mode: 'Markdown' });
-      let msg = '📋 *Сіздің мәзіріңіз:*\n\n';
-      menu.forEach((item, i) => msg += `${i+1}. ${item.name_kk} — ${item.price} ₸\n`);
-      return bot.sendMessage(chatId, msg, { parse_mode: 'Markdown' });
+      let menuMsg = '📋 *Сіздің мәзіріңіз:*\n\n';
+      menu.forEach((item, i) => menuMsg += `${i+1}. ${item.name_kk} — ${item.price} ₸\n`);
+      return bot.sendMessage(chatId, menuMsg, { parse_mode: 'Markdown' });
     }
 
     if (text === '➕ Тауар қосу') {
@@ -498,7 +485,7 @@ bot.on('message', async (msg) => {
     }
   }
 
-  // Егер түймелерге сәйкес келмесе, түсініксіз сөз жазғандарға қате хабарламасы
+  // Егер ешбір шартқа сәйкес келмесе
   bot.sendMessage(chatId, '⚠️ *Мұндай команда немесе мәзір түймесі табылмады.*\nТөмендегі батырмаларды пайдаланыңыз немесе жүйеге кіріңіз.', { parse_mode: 'Markdown', ...getHomeButton() });
 });
 
@@ -561,4 +548,4 @@ bot.on('callback_query', async (callback) => {
   }
 });
 
-console.log('🚀 Бот AI-сыз, таза логикамен сәтті іске қосылды!');
+console.log('🚀 Бот таза логикамен, қатесіз сәтті іске қосылды!');
