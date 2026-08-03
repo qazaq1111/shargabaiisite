@@ -1,3 +1,4 @@
+require('dotenv').config();
 const TelegramBot = require('node-telegram-bot-api');
 const admin = require('firebase-admin');
 const QRCode = require('qrcode');
@@ -15,7 +16,7 @@ const SUPER_ADMIN_LOGIN = 'superadmin';
 const SUPER_ADMIN_PASS = 'SHARGA2026';
 const RESET_PRICE = 5000;
 
-// ================== FIREBASE ==================
+// ================== FIREBASE (Firestore + Realtime) ==================
 const serviceAccount = {
   "type": "service_account",
   "project_id": "shargabaiisite",
@@ -25,8 +26,13 @@ const serviceAccount = {
   "client_id": "104903887535443706109"
 };
 
-admin.initializeApp({ credential: admin.credential.cert(serviceAccount) });
+// Firestore + Realtime Database қосылады
+admin.initializeApp({
+  credential: admin.credential.cert(serviceAccount),
+  databaseURL: "https://shargabaiisite-default-rtdb.asia-southeast1.firebasedatabase.app"
+});
 const db = admin.firestore();
+const rtdb = admin.database();
 const bot = new TelegramBot(BOT_TOKEN, { polling: true });
 
 // ================== СЕССИЯЛАР ==================
@@ -54,6 +60,14 @@ function getSuperKeyboard() {
   return { reply_markup: {
     keyboard: [['📋 Барлық кафелер', '📊 Статистика'], ['🚪 Шығу']], resize_keyboard: true
   }};
+}
+
+// ================== НАҚТЫ УАҚЫТ ЖӘНЕ FIRESTORE ЖАҢАРТУ ==================
+async function updateRealtimeAndFirestore(cafeId, updateData) {
+  // 1. Firestore-ға жазу (негізгі сақтау)
+  await db.collection('cafes').doc(cafeId).update(updateData);
+  // 2. Realtime Database-ге жазу (нақты уақыттағы өзгеріс – сайт бірден көреді)
+  await rtdb.ref(`cafes/${cafeId}`).update(updateData);
 }
 
 async function getCafe(chatId) {
@@ -178,7 +192,8 @@ bot.on('message', async (msg) => {
   }
 
   if (sessions[chatId]?.step === 'reset_new_password') {
-    await db.collection('cafes').doc(sessions[chatId].resetCafeId).update({
+    // Firestore + Realtime бірге жаңарту
+    await updateRealtimeAndFirestore(sessions[chatId].resetCafeId, {
       login: sessions[chatId].newLogin,
       password: text.trim()
     });
@@ -320,7 +335,8 @@ bot.on('message', async (msg) => {
       const newId = menu.length > 0 ? Math.max(...menu.map(i => i.id)) + 1 : 1;
       sessions[chatId].newItem.id = newId;
       menu.push(sessions[chatId].newItem);
-      await db.collection('cafes').doc(String(chatId)).update({ menu });
+      // Firestore + Realtime бірге жаңарту (нақты уақыт)
+      await updateRealtimeAndFirestore(String(chatId), { menu });
       bot.sendMessage(chatId, '✅ *Тауар сәтті қосылды!*', { parse_mode: 'Markdown' });
       delete sessions[chatId].step;
       bot.sendMessage(chatId, '🏪 *Басты мәзір*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
@@ -358,8 +374,9 @@ bot.on('message', async (msg) => {
         item.name_kk = sessions[chatId].editData.name_kk;
         item.name_ru = sessions[chatId].editData.name_ru;
         item.price = parseInt(text.trim());
-        await db.collection('cafes').doc(String(chatId)).update({ menu });
       }
+      // Firestore + Realtime бірге жаңарту
+      await updateRealtimeAndFirestore(String(chatId), { menu });
       bot.sendMessage(chatId, '✅ *Тауар сәтті өзгертілді!*', { parse_mode: 'Markdown' });
       delete sessions[chatId].step;
       bot.sendMessage(chatId, '🏪 *Басты мәзір*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
@@ -371,7 +388,8 @@ bot.on('message', async (msg) => {
       const id = parseInt(text.split('.')[0].replace('🗑️ ', ''));
       const cafe = await getCafe(chatId);
       const menu = (cafe?.menu || []).filter(i => i.id !== id);
-      await db.collection('cafes').doc(String(chatId)).update({ menu });
+      // Firestore + Realtime бірге жаңарту
+      await updateRealtimeAndFirestore(String(chatId), { menu });
       bot.sendMessage(chatId, '✅ *Тауар сәтті жойылды!*', { parse_mode: 'Markdown' });
       delete sessions[chatId].step;
       bot.sendMessage(chatId, '🏪 *Басты мәзір*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
@@ -399,7 +417,8 @@ bot.on('message', async (msg) => {
     }
     if (sessions[chatId]?.step === 'theme_text') {
       sessions[chatId].theme.text = text.trim();
-      await db.collection('cafes').doc(String(chatId)).update({ theme: sessions[chatId].theme });
+      // Firestore + Realtime бірге жаңарту
+      await updateRealtimeAndFirestore(String(chatId), { theme: sessions[chatId].theme });
       bot.sendMessage(chatId, '✅ *Түстер сәтті сақталды!*', { parse_mode: 'Markdown' });
       delete sessions[chatId].step;
       bot.sendMessage(chatId, '🏪 *Басты мәзір*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
@@ -431,7 +450,7 @@ bot.on('message', async (msg) => {
   }
 });
 
-// ================== СУРЕТ ==================
+// ================== СУРЕТ (Топқа жіберу + сілтеме алу) ==================
 bot.on('photo', async (msg) => {
   const chatId = msg.chat.id;
   if (sessions[chatId]?.step !== 'photo_upload') return;
@@ -449,7 +468,7 @@ bot.on('photo', async (msg) => {
   bot.sendMessage(chatId, '🏪 *Басты мәзір*', { parse_mode: 'Markdown', ...getCafeKeyboard() });
 });
 
-// ================== PDF / ЧЕК ==================
+// ================== PDF / ЧЕК (Соманы оқу) ==================
 bot.on('document', async (msg) => {
   const chatId = msg.chat.id;
   if (msg.document.mime_type !== 'application/pdf') return bot.sendMessage(chatId, '❌ Тек PDF', { parse_mode: 'Markdown' });
@@ -476,21 +495,43 @@ bot.on('callback_query', async (callback) => {
   }
 });
 
-// ================== СУПЕР-АДМИН (қосымша) ==================
+// ================== СУПЕР-АДМИН ==================
 bot.on('message', async (msg) => {
   const chatId = msg.chat.id;
-  if (sessions[chatId]?.role !== 'superadmin') return;
-  if (msg.text === '📋 Барлық кафелер') {
-    const snap = await db.collection('cafes').get();
-    let list = '📋 *Барлық кафелер:*\n\n';
-    snap.forEach(doc => { const d = doc.data(); list += `🔹 ${d.name || 'Атаусыз'} (${d.login})\n`; });
-    bot.sendMessage(chatId, list || 'Кафе жоқ', { parse_mode: 'Markdown' });
-  }
-  if (msg.text === '📊 Статистика') {
-    const snap = await db.collection('cafes').get();
-    bot.sendMessage(chatId, `📊 *Жалпы статистика*\n👥 Кафе саны: ${snap.size}`, { parse_mode: 'Markdown' });
+  const text = msg.text;
+  
+  // Тек супер-админ рөлінде ғана жұмыс істейтін батырмалар
+  if (sessions[chatId]?.role === 'superadmin') {
+    if (text === '📋 Барлық кафелер') {
+      try {
+        const snap = await db.collection('cafes').get();
+        let list = '📋 *Барлық кафелер:*\n\n';
+        let count = 0;
+        snap.forEach(doc => { 
+          const d = doc.data(); 
+          list += `🔹 ${d.name || 'Атаусыз'} (ID: ${doc.id})\n`;
+          count++;
+        });
+        if (count === 0) list = '📭 *Әзірге ешқандай кафе жоқ.*';
+        bot.sendMessage(chatId, list, { parse_mode: 'Markdown' });
+      } catch (error) {
+        bot.sendMessage(chatId, `❌ Қате: ${error.message}`, { parse_mode: 'Markdown' });
+      }
+      return;
+    }
+
+    if (text === '📊 Статистика') {
+      try {
+        const snap = await db.collection('cafes').get();
+        bot.sendMessage(chatId, `📊 *Жалпы статистика*\n👥 Тіркелген кафелер саны: ${snap.size}`, { parse_mode: 'Markdown' });
+      } catch (error) {
+        bot.sendMessage(chatId, `❌ Қате: ${error.message}`, { parse_mode: 'Markdown' });
+      }
+      return;
+    }
   }
 });
 
 // ================== ІСКЕ ҚОСУ ==================
-console.log('🚀 Толық нұсқа бот іске қосылды!');
+console.log('🚀 ТОЛЫҚ НҰСҚА (500+ жол) бот іске қосылды!');
+console.log('✅ Firestore + Realtime Database (нақты уақыт) қосылды!');
